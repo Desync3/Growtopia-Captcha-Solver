@@ -51,10 +51,6 @@ Example Solver In C++
 ```c++
 case fnv32("onShowCaptcha"): {
           auto menu = varlist[1].get_string();
-              if (menu.find("`wAre you Human?``") != std::string::npos) {
-                gt::solve_captcha(menu);
-                return true;
-            }
             auto g = split(menu, "|");
             std::string captchaid = g[1];
             utils::replace(captchaid, "0098/captcha/generated/", "");
