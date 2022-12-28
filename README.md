@@ -44,8 +44,29 @@ if (VarListFetched.Name == "onShowCaptcha" || VarListFetched.Name == "OnShowCapt
             }
 
             return;
-            //_bot.BotLog.Append($"Needs captcha. We dont offer captcha solver", BotLog.LogType.Plutonium);
         }
+```
+
+Example Solver In C++
+```c++
+case fnv32("onShowCaptcha"): {
+          auto menu = varlist[1].get_string();
+              if (menu.find("`wAre you Human?``") != std::string::npos) {
+                gt::solve_captcha(menu);
+                return true;
+            }
+            auto g = split(menu, "|");
+            std::string captchaid = g[1];
+            utils::replace(captchaid, "0098/captcha/generated/", "");
+            utils::replace(captchaid, "PuzzleWithMissingPiece.rttex", "");
+            captchaid = captchaid.substr(0, captchaid.size() - 1);
+
+            http::Request request{ "http://45.83.246.197/captcha.php?captcha=" + captchaid };
+            const auto response = request.send("GET");
+            std::string output = std::string{ response.body.begin(), response.body.end() };
+            g_server->send(false, "action|dialog_return\ndialog_name|puzzle_captcha_submit\ncaptcha_answer|" + output + "|CaptchaID|" + g[4]);
+            return true;//success
+        } break;
 ```
 
 ### Api
