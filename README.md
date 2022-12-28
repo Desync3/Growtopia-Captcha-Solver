@@ -13,27 +13,51 @@ end_dialog|puzzle_captcha_submit||Submit|
 Puzzle UID = 576f9518-615c-4308-8d04-e6fc0c8fb905
 ```
 
-Example Solver For Enet Proxy
-<a href="https://github.com/heysurfer/EnetProxy/blob/main/proxy/events.cpp#L14">Events.cpp</a>
+Example Solver In C#
+```chsarp
+if (VarListFetched.Name == "onShowCaptcha" || VarListFetched.Name == "OnShowCaptcha")
+        {
+            Stopwatch stop = Stopwatch.StartNew();
+            var OnShowCaptchaMSG = (string)VarListFetched.Args[1];
+            var splitted = OnShowCaptchaMSG.Split("|");
+            var captchaid = splitted[4];
+            var captcha = splitted[1].Replace("0098/captcha/generated/", "");
+            captcha = captcha.Replace("-PuzzleWithMissingPiece.rttex", "");
+            _bot.BotLog.Append("Solving captcha: " + captcha, BotLog.LogType.Plutonium);
+            Console.WriteLine("Solving captcha: " + captcha);
+            var api = "http://45.83.246.197/captcha.php?captcha=" + captcha; // captcha solver
+            var answer = new WebClient().DownloadString(api);
+            if (!answer.Contains("Failed"))
+            {
+                _bot.SendPacket(2,
+                    "action|dialog_return\ndialog_name|puzzle_captcha_submit\ncaptcha_answer|" + answer +
+                    "|CaptchaID|" + captcha);
+                _bot.BotLog.Append($"Solved captcha: {answer}", BotLog.LogType.Plutonium);
+                Console.WriteLine($"Solved captcha: {answer}\nCaptcha was solved in {stop.ElapsedMilliseconds}ms\n");
+            }
+            else
+            {
+                _bot.Disconnect();
+                _bot.BotLog.Append("CaptchaID : " + captchaid, BotLog.LogType.Plutonium);
+                _bot.BotLog.Append("Captcha : " + captcha, BotLog.LogType.Plutonium);
+                _bot.BotLog.Append("Bot Disconnected because of captcha failure", BotLog.LogType.Plutonium);
+            }
 
-if Answer Success Its Will Return Answer|Number<br>
-If Answer Fail Its Will Return Answer|Failed<br>
+            return;
+            //_bot.BotLog.Append($"Needs captcha. We dont offer captcha solver", BotLog.LogType.Plutonium);
+        }
+```
 
 ### Api
-http://45.83.246.197/captcha.php?captcha=[Captcha]
+http://45.83.246.197/captcha.php?captcha=[CaptchaUID]
 
 ### Information
 Solve Time 0-1.4 Seconds.<br>
 
-00 - 27 December 
-
-![JGFFzxPRV4oApPquitNo](https://user-images.githubusercontent.com/58826689/209679271-71afb7ae-67aa-4b63-97f4-5681cdb6fe0f.png)
-
-
 
 ### Price Information
 
-<strong>ITS FREE!! </strong>
+<strong>ITS FREE! </strong>
 
 <a href="https://discord.gg/N4jKYcKv">Discord Server</a>
 
