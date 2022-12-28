@@ -82,7 +82,7 @@ Solve Time 0-1.4 Seconds.<br>
 ### Example Request
 Request Method : GET
 
-```curl "http://45.83.246.197/captcha.php?captcha=07ed133c-ee0e-4fcb-8e76-81dda6aa5333" ```
+```curl "http://45.83.246.197/captcha.php?captcha=07ed133c-ee0e-4fcb-8e76-81dda6aa5333 ```
 ### Response
 Response txt format
 ```txt
