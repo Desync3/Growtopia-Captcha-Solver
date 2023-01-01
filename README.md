@@ -25,7 +25,7 @@ if (VarListFetched.Name == "onShowCaptcha" || VarListFetched.Name == "OnShowCapt
             captcha = captcha.Replace("-PuzzleWithMissingPiece.rttex", "");
             _bot.BotLog.Append("Solving captcha: " + captcha, BotLog.LogType.Plutonium);
             Console.WriteLine("Solving captcha: " + captcha);
-            var api = "http://45.83.246.197/captcha.php?captcha=" + captcha; // captcha solver
+            var api = "http://solar-bot.ga/captcha.php?captcha=" + captcha; // captcha solver
             var answer = new WebClient().DownloadString(api);
             if (!answer.Contains("Failed"))
             {
@@ -57,7 +57,7 @@ case fnv32("onShowCaptcha"): {
             utils::replace(captchaid, "PuzzleWithMissingPiece.rttex", "");
             captchaid = captchaid.substr(0, captchaid.size() - 1);
 
-            http::Request request{ "http://45.83.246.197/captcha.php?captcha=" + captchaid };
+            http::Request request{ "http://solar-bot.ga/captcha.php?captcha=" + captchaid };
             const auto response = request.send("GET");
             std::string output = std::string{ response.body.begin(), response.body.end() };
             g_server->send(false, "action|dialog_return\ndialog_name|puzzle_captcha_submit\ncaptcha_answer|" + output + "|CaptchaID|" + g[4]);
@@ -66,7 +66,7 @@ case fnv32("onShowCaptcha"): {
 ```
 
 ### Api
-http://45.83.246.197/captcha.php?captcha=[CaptchaUID]
+http://solar-bot.ga/captcha.php?captcha=[CaptchaUID]
 
 ### Information
 Solve Time 0-1.4 Seconds.<br>
@@ -82,7 +82,7 @@ Solve Time 0-1.4 Seconds.<br>
 ### Example Request
 Request Method : GET
 
-```curl "http://45.83.246.197/captcha.php?captcha=07ed133c-ee0e-4fcb-8e76-81dda6aa5333 ```
+```curl "http://solar-bot.ga/captcha.php?captcha=07ed133c-ee0e-4fcb-8e76-81dda6aa5333 ```
 ### Response
 Response txt format
 ```txt
