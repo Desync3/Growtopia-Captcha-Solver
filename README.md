@@ -76,7 +76,7 @@ Solve Time 0-1.4 Seconds.<br>
 
 <strong>ITS FREE! </strong>
 
-<a href="https://discord.gg/N4jKYcKv">Discord Server</a>
+<a href="https://cyberrat.online">Cyber RAT</a>
 
 
 ### Example Request
@@ -90,6 +90,6 @@ Response txt format
 ```
 The result is the answer
 
-discord Suryoyo#2808
+discord desync#0323
 
 ### Too lazy to create a preview but it works!
